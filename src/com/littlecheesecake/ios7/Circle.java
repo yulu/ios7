@@ -30,7 +30,9 @@ public class Circle{
 	 * @return 
 	 */
 	public void draw(Canvas canvas, int motion_x, int motion_y){
-		drawable.setBounds(x + motion_x*motion_level, y + motion_y*motion_level, x+size, y+size);
+		int input_x = x + motion_x*motion_level;
+		int input_y = y + motion_y*motion_level;
+		drawable.setBounds(input_x, input_y, input_x+size, input_y+size);
 		drawable.draw(canvas);
 	}
 	

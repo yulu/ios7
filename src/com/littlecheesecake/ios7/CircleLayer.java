@@ -57,7 +57,7 @@ public class CircleLayer {
 		public void addCircles(Context context, CircleLayer cLayer) {
 			Circle c1 = new Circle(context.getResources().getDrawable(R.drawable.c3), motion_level, width, height);
 			Circle c2 = new Circle(context.getResources().getDrawable(R.drawable.c2), motion_level, width, height);
-			Circle c3 = new Circle(context.getResources().getDrawable(R.drawable.c3), motion_level, width, height);
+			Circle c3 = new Circle(context.getResources().getDrawable(R.drawable.c6), motion_level, width, height);
 			Circle c4 = new Circle(context.getResources().getDrawable(R.drawable.c5), motion_level, width, height);
 			
 			cLayer.add(c1);
