@@ -1,6 +1,7 @@
 package com.littlecheesecake.ios7;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,7 +13,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class OsView extends View{
-	private ArrayList<Drawable> circles;
+	private Circle[] circles;
 	private int width;
 	private int height;
 	
@@ -37,7 +38,7 @@ public class OsView extends View{
 	}
 	
 	private void init(Context context){
-		loadCircles(5);
+
 
 	}
 	
@@ -50,6 +51,7 @@ public class OsView extends View{
 		mBitmap = Bitmap.createScaledBitmap(mBitmap, w, h, false);
 
 		//mCanvas.setBitmap(mBitmap.copy(Bitmap.Config.ARGB_8888, true));
+		loadCircles(10);
 		
 		super.onSizeChanged(w, h, oldw, oldh);
 	}
@@ -61,8 +63,13 @@ public class OsView extends View{
 			if(mBitmap != null){
 				canvas.drawBitmap(mBitmap, 0, 0, null);
 				
-				circles.get(0).setBounds(250, 100, 400, 250);
-				circles.get(0).draw(canvas);
+				for(int i = 0; i < 10; i++){
+					int x = circles[i].x;
+					int y = circles[i].y;
+					int s = circles[i].size;
+					circles[i].drawable.setBounds(x, y, x+s, y+s);
+					circles[i].drawable.draw(canvas);
+				}
 			}
 		}
 	}
@@ -71,9 +78,20 @@ public class OsView extends View{
 	private void loadCircles(int num){
 		//TODO:load the drawables in the arraylist
 		//keep in mind the top layer have smaller motion than bottom layer: design the order
-		circles = new ArrayList<Drawable>(num);
-		Drawable circle = getResources().getDrawable(R.drawable.c1);
-		circles.add(circle);
+		circles = new Circle[num];
+		circles[0] = new Circle(getResources().getDrawable(R.drawable.c1), 1, width, height);
+		circles[1] = new Circle(getResources().getDrawable(R.drawable.c2), 2, width, height);
+		circles[2] = new Circle(getResources().getDrawable(R.drawable.c3), 3, width, height);
+		circles[3] = new Circle(getResources().getDrawable(R.drawable.c4), 4, width, height);
+		circles[4] = new Circle(getResources().getDrawable(R.drawable.c5), 5, width, height);
+		circles[5] = new Circle(getResources().getDrawable(R.drawable.c1), 1, width, height);
+		circles[6] = new Circle(getResources().getDrawable(R.drawable.c2), 2, width, height);
+		circles[7] = new Circle(getResources().getDrawable(R.drawable.c3), 3, width, height);
+		circles[8] = new Circle(getResources().getDrawable(R.drawable.c4), 4, width, height);
+		circles[9] = new Circle(getResources().getDrawable(R.drawable.c5), 5, width, height);
+
+		
+
 	}
 	
 	/**
@@ -81,14 +99,28 @@ public class OsView extends View{
 	 * @author aki
 	 *
 	 */
-	private class DrawingParameters{
+	private class Circle{
+		Drawable drawable;
 		int x; //x position
 		int y; //y position
 		int size; //size of circle
 		int motion; //motion parameter
 		
-		public DrawingParameters(int motion){
-			//TODO:generate random parameters for x, y, size
+		public Circle(Drawable drawable, int motion, int width, int height){
+			this.drawable = drawable;
+			this.motion = motion;
+			randamParam(width, height);		
+		}
+		
+		public void setMotion(int motion){
+			this.motion = motion;
+		}
+		
+		private void randamParam(int width, int height){
+			Random generator = new Random();
+			x = generator.nextInt(width);
+			y = generator.nextInt(height);
+			size = width/2 - generator.nextInt(width/4);
 		}
 	}
 
