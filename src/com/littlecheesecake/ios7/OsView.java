@@ -107,7 +107,7 @@ public class OsView extends View implements SensorEventListener{
 	public void onSensorChanged(SensorEvent event) {
 		synchronized(this){
 			if(start_a != -1000 || start_p != -1000){			
-				final float azimuth = event.values[0];
+				final float azimuth = event.values[2];
 				final float pitch = event.values[1];
 				
 				motion_x = (int) (start_a - azimuth);
@@ -115,7 +115,7 @@ public class OsView extends View implements SensorEventListener{
 				//System.err.println(motion_y);
 				
 			}else{
-				start_a = event.values[0];
+				start_a = event.values[2];
 				start_p = event.values[1];
 			}
 				
