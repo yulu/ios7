@@ -90,8 +90,8 @@ public class OsView extends View implements SensorEventListener{
 	private void loadCircles(){
 		//TODO:load the drawables in the arraylist
 		//keep in mind the top layer have smaller motion than bottom layer: design the order
-		CircleLayer.FirstLevelCircleLayer ff = new CircleLayer.FirstLevelCircleLayer(width, height, 4);
-		CircleLayer.SecondLevelCircleLayer sf = new CircleLayer.SecondLevelCircleLayer(width, height, 6);
+		CircleLayer.FirstLevelCircleLayer ff = new CircleLayer.FirstLevelCircleLayer(width, height, 6);
+		CircleLayer.SecondLevelCircleLayer sf = new CircleLayer.SecondLevelCircleLayer(width, height, 3);
 		mLayer1 = ff.createCircleLayer(getContext());
 		mLayer2 = sf.createCircleLayer(getContext());
 
@@ -111,7 +111,7 @@ public class OsView extends View implements SensorEventListener{
 				final float pitch = event.values[1];
 				
 				motion_x = (int) (start_a - azimuth);
-				motion_y = (int)(start_p - pitch);
+				motion_y = (int) (start_p - pitch);
 				//System.err.println(motion_y);
 				
 			}else{
@@ -123,7 +123,4 @@ public class OsView extends View implements SensorEventListener{
 		}
 		
 	}
-	
-
-
 }
